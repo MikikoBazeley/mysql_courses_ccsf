@@ -18,13 +18,15 @@ DROP TABLE IF EXISTS LOCATION;
 
 /* ****************************************************************************/
 
-
+DROP DATABASE IF EXISTS university;
+CREATE DATABASE university;
+USE university;
 --------------------------------------------------
 
 CREATE TABLE DEPARTMENT (
-    dept_id INT NOT NULL ???,
-    dept_name VARCHAR(30) ???,
-    budget INT ???,
+    dept_id INT(2) UNSIGNED,
+    dept_name VARCHAR(30) NOT NULL,
+    budget INT(10) UNSIGNED, NOT NULL,
     CONSTRAINT DEPT_PK PRIMARY KEY (dept_id)
 );
 
@@ -38,7 +40,6 @@ CREATE TABLE COURSE (
     CONSTRAINT COURSE_PK PRIMARY KEY (course_id),
     CONSTRAINT DEPT_FK FOREIGN KEY (dept_id)
         REFERENCES DEPARTMENT (dept_id)
-        ON DELETE CASCADE ????????
 );
 
 CREATE TABLE FACULTY (
