@@ -1,0 +1,394 @@
+mysql> source c:\my_scripts\Assignment4\mbazeley_assignment4.sql
+--------------
+-- Assignment 4.sql
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Mikiko Bazeley
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- CS155A, Fall 2016
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+ 
+ 
+-- put the database name into this command
+USE bookstore
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 1
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+The Pioneer Book Store has decided to keep track of computers used by the employees.
+In order to do this, one new table will be added to the database. The schema for these
+tables, as related to the existing EMPLOYEE table is:
+COMPUTER(serial_number, make, model, processor_type, memory,
+disk_size)
+Create a new table containing these six columns: serial_number, make, model,
+processor_type, memory, disk_size. The table name should be COMPUTER. The
+serial_number column contains a numeric number which should consist of a sevendigit
+number. Use column sizes you consider suitable for the make, model,
+processor_type, memory,disk_size columns. The serial_number column is a primary
+key.
+Specify the InnoDB storage engine for the new table.
+*/
+
+
+CREATE TABLE computer (
+ serial_number INT(7) UNSIGNED,
+ make VARCHAR(5) NOT NULL,
+ model VARCHAR(20) NOT NULL,
+ processor_type VARCHAR(20) NOT NULL,
+ memory VARCHAR(20) NOT NULL,
+ disk_size VARCHAR(10) NOT NULL,
+ PRIMARY KEY (serial_number))ENGINE=INNODB
+--------------
+
+Query OK, 0 rows affected (0.60 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 2
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Add five rows to the COMPUTER table. 
+Copy and run the following SQL statements.
+*/
+INSERT INTO COMPUTER VALUES(
+9871234, 'HP', 'Pavilion 500-210qe', 'Intel i5-4530',
+'6.0 GBytes', '1.0 TBytes')
+--------------
+
+Query OK, 1 row affected (0.06 sec)
+
+--------------
+INSERT INTO COMPUTER VALUES(
+9871245, 'HP', 'Pavilion 500-210qe', 'Intel i5-4530',
+'6.0 GBytes', '1.0 TBytes')
+--------------
+
+Query OK, 1 row affected (0.02 sec)
+
+--------------
+INSERT INTO COMPUTER VALUES(
+9871256, 'HP', 'Pavilion 500-210qe', 'Intel i5-4530',
+'6.0 GBytes', '1.0 TBytes')
+--------------
+
+Query OK, 1 row affected (0.08 sec)
+
+--------------
+INSERT INTO COMPUTER VALUES(
+9871267, 'HP', 'Pavilion 500-210qe', 'Intel i5-4530',
+'6.0 GBytes', '1.0 TBytes')
+--------------
+
+Query OK, 1 row affected (0.05 sec)
+
+--------------
+INSERT INTO COMPUTER VALUES(
+9871278, 'HP', 'Pavilion 500-210qe', 'Intel i5-4530',
+'6.0 GBytes', '1.0 TBytes')
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 3
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Alter the COMPUTER table to add a column that will be used to store the processor
+speed. Name this column processor_speed and use an appropriate number datatype
+specification. You do not need to store any data to this column.
+*/
+ALTER TABLE computer
+ADD processor_speed INT(10) UNSIGNED
+--------------
+
+Query OK, 0 rows affected (0.80 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 4
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+	Display the rows in the COMPUTER table.
+*/
+SELECT *
+FROM computer
+--------------
+
++---------------+------+--------------------+----------------+------------+------------+-----------------+
+| serial_number | make | model              | processor_type | memory     | disk_size  | processor_speed |
++---------------+------+--------------------+----------------+------------+------------+-----------------+
+|       9871234 | HP   | Pavilion 500-210qe | Intel i5-4530  | 6.0 GBytes | 1.0 TBytes |            NULL |
+|       9871245 | HP   | Pavilion 500-210qe | Intel i5-4530  | 6.0 GBytes | 1.0 TBytes |            NULL |
+|       9871256 | HP   | Pavilion 500-210qe | Intel i5-4530  | 6.0 GBytes | 1.0 TBytes |            NULL |
+|       9871267 | HP   | Pavilion 500-210qe | Intel i5-4530  | 6.0 GBytes | 1.0 TBytes |            NULL |
+|       9871278 | HP   | Pavilion 500-210qe | Intel i5-4530  | 6.0 GBytes | 1.0 TBytes |            NULL |
++---------------+------+--------------------+----------------+------------+------------+-----------------+
+5 rows in set (0.00 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 5
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Display column names and datatypes for the COMPUTER table
+*/
+DESC computer
+--------------
+
++-----------------+------------------+------+-----+---------+-------+
+| Field           | Type             | Null | Key | Default | Extra |
++-----------------+------------------+------+-----+---------+-------+
+| serial_number   | int(7) unsigned  | NO   | PRI | NULL    |       |
+| make            | varchar(5)       | NO   |     | NULL    |       |
+| model           | varchar(20)      | NO   |     | NULL    |       |
+| processor_type  | varchar(20)      | NO   |     | NULL    |       |
+| memory          | varchar(20)      | NO   |     | NULL    |       |
+| disk_size       | varchar(10)      | NO   |     | NULL    |       |
+| processor_speed | int(10) unsigned | YES  |     | NULL    |       |
++-----------------+------------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 6
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Delete the processor_speed column from the COMPUTER table
+*/
+ALTER TABLE computer 
+DROP COLUMN processor_speed
+--------------
+
+Query OK, 0 rows affected (0.61 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 7
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Rename the COMPUTER table as COMPUTER_BACKUP.
+*/
+RENAME TABLE computer to computer_backup
+--------------
+
+Query OK, 0 rows affected (0.26 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 8
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Display the names of the tables in your current database. 
+*/
+SHOW TABLES
+--------------
+
++---------------------+
+| Tables_in_bookstore |
++---------------------+
+| address             |
+| administrators      |
+| category            |
+| computer_backup     |
+| customer            |
+| employee            |
+| orderitems          |
+| orders              |
+| product             |
+| store               |
+| vendor              |
++---------------------+
+11 rows in set (0.00 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 9
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Remove the COMPUTER_BACKUP table from the database. Display the names of the
+tables in your current database.
+
+
+*/	
+DROP TABLE computer_backup
+--------------
+
+Query OK, 0 rows affected (0.17 sec)
+
+--------------
+SHOW TABLES
+--------------
+
++---------------------+
+| Tables_in_bookstore |
++---------------------+
+| address             |
+| administrators      |
+| category            |
+| customer            |
+| employee            |
+| orderitems          |
+| orders              |
+| product             |
+| store               |
+| vendor              |
++---------------------+
+10 rows in set (0.00 sec)
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 10
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Alter the EMPLOYEE table to add a column that will be used to store the salary earned
+year-to-date. Name this column SalaryYearToDate and use an appropriate NUMBER
+datatype specification. You do not need to store any data to this column
+*/
+ALTER TABLE employee
+ADD SalaryYearToDate DECIMAL(10,2)
+--------------
+
+Query OK, 0 rows affected (0.82 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+--
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+-- Query 11
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*
+Write an SQL statement to drop the SalaryYearToDate column you added to the
+EMPLOYEE table in query 10.
+
+*/
+ALTER TABLE employee
+DROP COLUMN SalaryYearToDate
+--------------
+
+Query OK, 0 rows affected (0.80 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> notee
