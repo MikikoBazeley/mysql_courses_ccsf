@@ -43,52 +43,49 @@ CREATE TABLE COURSE (
 );
 
 CREATE TABLE FACULTY (
-    faculty_id INT ?????? NOT NULL,
-    room_id INT ????? NOT NULL,
+    faculty_id INT(8) UNSIGNED,
+    room_id INT(3) UNSIGNED NOT NULL,
     dept_id INT ????? NOT NULL,
-    name VARCHAR(15) ???? NULL,
-    salary DECIMAL(10,2) ???? NULL,
+    name VARCHAR(15) NOT NULL,
+    salary DECIMAL(10,2) UNSIGNED NOT NULL,
     CONSTRAINT FAC_PK PRIMARY KEY (faculty_id),
     CONSTRAINT ROOM_FK FOREIGN KEY (room_id)
-        REFERENCES LOCATION (room_id)
-        ON DELETE CASCADE?????,
+        REFERENCES LOCATION (room_id),
     CONSTRAINT DEPT_FK FOREIGN KEY (dept_id)
         REFERENCES DEPARTMENT (dept_id)
-        ON DELETE CASCADE ?????, 
 );
 
 CREATE TABLE STUDENT (
-    student_id INT ???????,
-    major_id INT ?????,
-    last_name VARCHAR(15) NOT NULL ????,
-    first_name VARCHAR(15) NOT NULL ?????,
-    street VARCHAR(15) NOT NULL ?????,
-    city VARCHAR(15) NOT NULL ?????,
-    state CHAR(2) ??????,
-    zip INT NOT NULL ?????,
-    birth_date DATE ???????,
-    phone INT ???????,
-    student_type ENUM('grad','ugrad') ????,
+    student_id INT(8) UNSIGNED,
+    major_id INT(4) UNSIGNED NOT NULL,
+    last_name VARCHAR(15) NOT NULL,
+    first_name VARCHAR(15) NOT NULL,
+    street VARCHAR(15) NOT NULL,
+    city VARCHAR(30) NOT NULL,
+    state CHAR(2) NOT NULL,
+    zip INT(6) UNSIGNED NOT NULL,
+    birth_date DATE NOT NULL,
+    phone INT(12) UNSIGNED NOT NULL,
+    student_type ENUM('grad','ugrad') NOT NULL,
     CONSTRAINT STUDENT_PK PRIMARY KEY (student_id),
     CONSTRAINT MAJOR_FK FOREIGN KEY (major_id)
         REFERENCES MAJOR (major_id)
-        ON DELETE CASCADE ??????????
 );
 
 CREATE TABLE TERM (
-    term_id VARCHAR(4) ?????,
-    term_desc VARCHAR(12) ????,
-    start_date DATE ?????,
-    end_date DATE ????,
+    term_id VARCHAR(5) ?????,
+    term_desc VARCHAR(12) UNIQUE NOT NULL ,
+    start_date DATE UNIQUE NOT NULL,
+    end_date DATE UNIQUE NOT NULL,
     CONSTRAINT TERM_PK PRIMARY KEY (term_id)
 );
 
 
 CREATE TABLE SECTION (
-    section_id INT ???????,
-    course_id VARCHAR(8) ?????,
-    term_id VARCHAR(4) NOT NULL ????,
-    faculty_id INT NOT NULL ?????,
+    section_id INT(6) UNSIGNED,
+    course_id VARCHAR(8) NOT NULL,
+    term_id VARCHAR(5) NOT NULL,
+    faculty_id INT INT(8) UNSIGNED,
     room_id INT NOT NULL ?????,
     section_number INT NOT NULL ?????,
     day SET('M','T','W','R','F') ??????,
