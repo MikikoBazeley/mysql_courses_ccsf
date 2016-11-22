@@ -70,7 +70,7 @@ CREATE TABLE SECTION (
     term_id VARCHAR(5) NOT NULL,
     faculty_id INT(8) UNSIGNED,
     room_id INT(3) UNSIGNED NOT NULL,
-    section_number INT(3) UNSIGNED NOT NULL,
+    section_number VARCHAR(3) NOT NULL,
     day SET('M','T','W','R','F') NOT NULL,
     max_count INT(3) UNSIGNED NOT NULL,
     start_time TIME DEFAULT 'TBA',
@@ -116,9 +116,10 @@ CREATE TABLE REGISTRATION (
     student_id INT(8) UNSIGNED,
     section_id INT INT(6) UNSIGNED,
     midterm_grade ENUM('A','B','C','D','F','W'),
-    final_grade ENUM('A','B','C','D','F','W'),
+        final_grade ENUM('A','B','C','D','F','W'),
     CONSTRAINT REGIS_PK PRIMARY KEY (student_id, section_id),
 );
 
 /* ****************************************************************************/
 /*	Import Data*/
+\. insert_data_university_database.mysql;
