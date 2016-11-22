@@ -1,6 +1,9 @@
 
 /*	University Database*/
 /* ****************************************************************************/
+-- Dropping Production Database and all tables and data
+-- ????????????????
+
 DROP TABLE IF EXISTS DEPARTMENT;
 DROP TABLE IF EXISTS COURSE;
 DROP TABLE IF EXISTS FACULTY;
@@ -10,6 +13,11 @@ DROP TABLE IF EXISTS SECTION;
 DROP TABLE IF EXISTS REGISTRATION;
 DROP TABLE IF EXISTS MAJOR;
 DROP TABLE IF EXISTS LOCATION;
+
+
+
+/* ****************************************************************************/
+
 
 --------------------------------------------------
 
@@ -128,3 +136,8 @@ CREATE TABLE LOCATION (
     room_description ENUM('Office','Lab','Classroom'),
     CONSTRAINT LOCAT_PK PRIMARY KEY (room_id),
 );
+
+
+
+/* ****************************************************************************/
+-- import data
