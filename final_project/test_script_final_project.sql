@@ -5,23 +5,28 @@
 DROP DATABASE IF EXISTS university;
 CREATE DATABASE IF NOT EXISTS university;
 USE university;
+
+
 /* ****************************************************************************/
 /*	Create Tables*/
--- 1	Faculty
-CREATE TABLE FACULTY (
-    faculty_id INT(8) UNSIGNED,
-    room_id INT(3) UNSIGNED NOT NULL,
-    dept_id INT INT(2) UNSIGNED NOT NULL,
-    name VARCHAR(15) NOT NULL,
-    salary DECIMAL(10,2) UNSIGNED NOT NULL,
-    CONSTRAINT FAC_PK PRIMARY KEY (faculty_id),
-    CONSTRAINT ROOM_FK FOREIGN KEY (room_id)
-        REFERENCES LOCATION (room_id),
-    CONSTRAINT DEPT_FK FOREIGN KEY (dept_id)
-        REFERENCES DEPARTMENT (dept_id)
+-- 1	Term
+CREATE TABLE TERM (
+    term_id VARCHAR(5),
+    term_desc VARCHAR(12) UNIQUE NOT NULL ,
+    start_date DATE UNIQUE NOT NULL,
+    end_date DATE UNIQUE NOT NULL,
+    CONSTRAINT TERM_PK PRIMARY KEY (term_id)
 );
 
--- 2	Location
+-- 2	Department
+CREATE TABLE DEPARTMENT (
+    dept_id INT(2) UNSIGNED,
+    dept_name VARCHAR(30) NOT NULL,
+    budget INT(10) UNSIGNED, NOT NULL,
+    CONSTRAINT DEPT_PK PRIMARY KEY (dept_id)
+);
+
+-- 3	Location
 CREATE TABLE LOCATION (
     room_id INT(3) UNSIGNED,
     building VARCHAR(10) NOT NULL,
@@ -32,24 +37,7 @@ CREATE TABLE LOCATION (
     CONSTRAINT LOCAT_PK PRIMARY KEY (room_id),
 );
 
--- 3	Term
-CREATE TABLE TERM (
-    term_id VARCHAR(5),
-    term_desc VARCHAR(12) UNIQUE NOT NULL ,
-    start_date DATE UNIQUE NOT NULL,
-    end_date DATE UNIQUE NOT NULL,
-    CONSTRAINT TERM_PK PRIMARY KEY (term_id)
-);
-
--- 4	Department
-CREATE TABLE DEPARTMENT (
-    dept_id INT(2) UNSIGNED,
-    dept_name VARCHAR(30) NOT NULL,
-    budget INT(10) UNSIGNED, NOT NULL,
-    CONSTRAINT DEPT_PK PRIMARY KEY (dept_id)
-);
-
--- 5	Course
+-- 4	Course
 CREATE TABLE COURSE (
     course_id VARCHAR(8),
     dept_id INT(2) UNSIGNED NOT NULL,
@@ -57,6 +45,20 @@ CREATE TABLE COURSE (
     credits INT(1) NOT NULL DEFAULT 0,
     prerequisite VARCHAR(8),
     CONSTRAINT COURSE_PK PRIMARY KEY (course_id),
+    CONSTRAINT DEPT_FK FOREIGN KEY (dept_id)
+        REFERENCES DEPARTMENT (dept_id)
+);
+
+-- 5	Faculty
+CREATE TABLE FACULTY (
+    faculty_id INT(8) UNSIGNED,
+    room_id INT(3) UNSIGNED NOT NULL,
+    dept_id INT INT(2) UNSIGNED NOT NULL,
+    name VARCHAR(15) NOT NULL,
+    salary DECIMAL(10,2) UNSIGNED NOT NULL,
+    CONSTRAINT FAC_PK PRIMARY KEY (faculty_id),
+    CONSTRAINT ROOM_FK FOREIGN KEY (room_id)
+        REFERENCES LOCATION (room_id),
     CONSTRAINT DEPT_FK FOREIGN KEY (dept_id)
         REFERENCES DEPARTMENT (dept_id)
 );
@@ -83,7 +85,6 @@ CREATE TABLE SECTION (
     CONSTRAINT ROOM_FK FOREIGN KEY (room_id)
         REFERENCES COURSE (course_id)
 );
-
 
 -- 7	Major
 CREATE TABLE MAJOR (
@@ -120,4 +121,4 @@ CREATE TABLE REGISTRATION (
 );
 
 /* ****************************************************************************/
--- import data
+/*	Import Data*/
