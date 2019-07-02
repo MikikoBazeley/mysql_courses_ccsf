@@ -1,1 +1,3 @@
-# mysql_courses_ccsf
+# MySql
+
+Snippets from MySQL classes.
